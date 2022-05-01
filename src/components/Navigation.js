@@ -29,17 +29,18 @@ const Navigation = () => {
         {user && <Link to="/home" 
                     title="Home" 
                     className="icon-btn" 
-                    style={{top:250}}>
+                    style={{top:150}}>
                   <HomeOutlined className="icon" />
                 </Link>
         }
-        {user && <Link to="/posts" 
-                    title="Posts" 
-                    className="icon-btn" 
-                    style={{top:350}}>
-                  <UnorderedListOutlined className="icon" />
-                </Link>
-        }
+        <Link 
+          to="/posts" 
+          title="Posts" 
+          className="icon-btn" 
+          style={{top:300}}
+        >
+          <UnorderedListOutlined className="icon" />
+        </Link>
         {user && <Link 
                     to="/profile" 
                     title="Profile" 
@@ -59,8 +60,8 @@ const Navigation = () => {
                   />
                 </Button>}
         {!user && <Link 
-                    to="/signup" 
-                    title="Sign Up" 
+                    to="/login" 
+                    title="Log In" 
                     className="icon-btn" 
                   >
                     <LoginOutlined className="icon" />

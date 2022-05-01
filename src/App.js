@@ -1,4 +1,4 @@
-import { Layout, Row, Col } from "antd";
+import { Layout, Row } from "antd";
 import { Routes, Route, Navigate } from "react-router-dom";
 import "./App.css";
 import Home from "./components/Home";
@@ -33,8 +33,7 @@ function App() {
       <Layout style={{backgroundColor: "white", marginTop: "20px"}}>
         <Layout.Content>
           <Row justify="center" align="middle">
-            <Col span={6}>
-              <Routes>
+          <Routes>
                 <Route
                   exact
                   path="/home"
@@ -56,11 +55,7 @@ function App() {
                 <Route
                   exact
                   path="/posts"
-                  element={
-                    <ProtectedRoute>
-                      <Posts />
-                    </ProtectedRoute>
-                  }
+                  element={<Posts />}
                 />
                 <Route 
                   exact 
@@ -78,7 +73,6 @@ function App() {
                 element={<Navigate to="/home" />} 
                 />
               </Routes>
-            </Col>
           </Row>
         </Layout.Content>
       </Layout>

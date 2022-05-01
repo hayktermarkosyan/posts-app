@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Form, Input, Button } from 'antd';
+import { Col, Form, Input, Button } from 'antd';
 import { UserOutlined, PhoneOutlined } from '@ant-design/icons';
 import { setDoc, doc, serverTimestamp } from 'firebase/firestore';
 import { db, storage } from '../firebase';
@@ -73,10 +73,16 @@ const Profile = () => {
 
 
   return (
-    <>
+    <Col
+      xs={{span: 16, offset: 2}} 
+      sm={{span: 16, offset: 2}} 
+      md={{span: 16, offset: 2}} 
+      lg={{span: 6, offset: 0}}
+    >
+      <p style={{ marginTop: "150px", textAlign: "center", fontSize: "24px" }}>Choose your profile image</p>
       <Input
           type="file" 
-          style={{ marginTop: "150px" }}
+          
           disabled={perc !== null && perc < 100}
           onChange={(e) => setImage(e.target.files[0])} 
       />
@@ -139,7 +145,7 @@ const Profile = () => {
           </Form.Item>
         </Form>
       </div>
-    </>
+    </Col>
     
   )
 }

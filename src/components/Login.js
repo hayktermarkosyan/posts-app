@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Form, Alert, Button, Input } from "antd";
+import { Col, Form, Alert, Button, Input } from "antd";
 import { useUserAuth } from "../context/AuthContext";
 import GoogleButton from "react-google-button";
 
@@ -11,7 +11,7 @@ const Login = () => {
   const { logIn, googleSignIn } = useUserAuth();
   const navigate = useNavigate();
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async () => {
     setError("");
     try {
       await logIn(email, password);
@@ -32,7 +32,13 @@ const Login = () => {
   };
 
   return (
-    <div style={{ marginTop: "200px" }}>
+    <Col 
+      xs={{span: 14, offset: 2}} 
+      sm={{span: 16, offset: 2}} 
+      md={{span: 16, offset: 2}} 
+      lg={{span: 6, offset: 0}} 
+      style={{ marginTop: "200px" }}
+    >
       <div align="center">
         {error && <Alert 
                     style={{marginBottom: "20px", borderRadius: "10px"}}  
@@ -106,9 +112,9 @@ const Login = () => {
       </div>
       
       <div align="center" style={{fontSize: "18px"}}>
-        Create an account. <Link to="/signup">Sign up</Link>
+        Do you want to create an account? <Link to="/signup">Sign up</Link>
       </div>
-    </div>
+    </Col>
   );
 };
 

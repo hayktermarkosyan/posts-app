@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { collection, onSnapshot } from "firebase/firestore";
 import { db } from "../firebase";
-import { Card } from "antd";
+import { Col, Card } from "antd";
 import unknownUser from "../images/unknown_user.png";
 import { useUserAuth } from "../context/AuthContext";
 
@@ -34,8 +34,12 @@ const Home = () => {
   }, [user])
 
   return (
-    <>
-      <div align="center" style={{marginTop: "150px", fontSize: "22px"}}>
+    <Col 
+      xs={{span: 20, offset: 4}}
+      sm={{offset: 0}}
+      span={20}
+      >
+      <div align="center" style={{marginTop: "50px", fontSize: "22px"}}>
         <p>Welcome to home page!</p>
         <Card
           hoverable
@@ -50,7 +54,7 @@ const Home = () => {
             description={data.phoneNum !== undefined ? data.phoneNum : "Unknown user"} />
         </Card>
       </div>
-    </>
+    </Col>
   );
 };
 

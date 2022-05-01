@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Form, Alert, Button, Input } from "antd";
+import { Form, Alert, Button, Input, Col } from "antd";
 import { useUserAuth } from "../context/AuthContext";
 
 const Signup = () => {
@@ -11,7 +11,7 @@ const Signup = () => {
   const navigate = useNavigate();
   
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async () => {
     setError("");
     try {
       await signUp(email, password);
@@ -22,7 +22,13 @@ const Signup = () => {
   };
 
   return (
-    <div style={{ marginTop: "200px" }}>
+    <Col 
+      xs={{span: 14, offset: 2}} 
+      sm={{span: 16, offset: 2}} 
+      md={{span: 16, offset: 2}} 
+      lg={{span: 6, offset: 0}} 
+      style={{ marginTop: "200px" }}
+    >
       <div align="center">
         {error && <Alert 
                     style={{marginBottom: "20px", borderRadius: "10px"}}  
@@ -89,9 +95,9 @@ const Signup = () => {
       </div>
       
       <div align="center" style={{fontSize: "18px"}}>
-        Already have an account? <Link to="/">Log In</Link>
+        Do you have an account? <Link to="/">Log In</Link>
       </div>
-    </div>
+    </Col>
   );
 };
 
