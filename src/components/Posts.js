@@ -18,8 +18,7 @@ const Posts = () => {
           userID: user.uid,
           createdBy: user.email,
           post,
-          wasLiked: false,
-          likesCount: 0,
+          wasLikedBy: [],
           time: serverTimestamp()
         });
         setPost("");
@@ -37,8 +36,8 @@ const Posts = () => {
     try {
       await setDoc(doc(db, "posts", post.id), {
         ...post,
-        wasLiked: !post.wasLiked,
-        likesCount: post.wasLiked === false ? post.likesCount += 1 : post.likesCount -= 1
+        wasLikedBy: post.wasLikedBy.includes(user.email) ? post.wasLikedBy.filter(e => e !== user.email) : 
+                    [...post.wasLikedBy, user.email]
       });
     } catch (error) {
       alert(error);
@@ -102,9 +101,10 @@ const Posts = () => {
                 className="post-reaction"
                 onClick={() => likePost(d)}
               >
-                {user !== null && d.wasLiked ? <HeartFilled style={{fontSize: "larger"}} /> : 
+                {user !== null && d.wasLikedBy.includes(user.email) ? 
+                              <HeartFilled style={{fontSize: "larger"}} /> : 
                               <HeartOutlined style={{fontSize: "larger"}} />}
-                <>{d.likesCount !== 0 ? d.likesCount : null}</>
+                <>{d.wasLikedBy.length !== 0 ? d.wasLikedBy.length : null}</>
               </Button>
               <div className="post-author">
                 Created by: {user !== null && d.userID === user.uid ? "You" : d.createdBy}

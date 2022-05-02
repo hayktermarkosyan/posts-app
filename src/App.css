@@ -146,7 +146,7 @@ textarea {
 }
 
 .post-delete:hover {
-  color: black;
+  color: red;
 }
 
 .post-delete:focus {
