@@ -1,10 +1,10 @@
 import React, { useState , useEffect} from 'react';
 import { Button, Col, Divider, Input, Row } from 'antd';
-import { setDoc, doc, serverTimestamp, onSnapshot, collection } from 'firebase/firestore';
+import { deleteDoc, setDoc, doc, serverTimestamp, onSnapshot, collection } from 'firebase/firestore';
 import { db } from '../firebase';
 import { useUserAuth } from '../context/AuthContext';
 import { v4 } from 'uuid';
-import { HeartFilled, HeartOutlined } from '@ant-design/icons';
+import { HeartFilled, HeartOutlined, CloseCircleOutlined } from '@ant-design/icons';
 
 const Posts = () => {
   const [post, setPost] = useState("");
@@ -19,7 +19,6 @@ const Posts = () => {
           createdBy: user.email,
           post,
           wasLiked: false,
-          isLike: false,
           likesCount: 0,
           time: serverTimestamp()
         });
@@ -43,6 +42,14 @@ const Posts = () => {
       });
     } catch (error) {
       alert(error);
+    }
+  }
+
+  const deletePost = async (post) => {
+    try {
+      await deleteDoc(doc(db, "posts", post.id));
+    } catch (error) {
+      console.log(error.message);
     }
   }
 
@@ -82,6 +89,14 @@ const Posts = () => {
               <div className="post-text">
                 {d.post}
               </div>
+              {(user !== null && d.userID === user.uid) && 
+                      <Button
+                        className="post-delete"
+                        onClick={() => deletePost(d)}
+                      >
+                        <CloseCircleOutlined style={{fontSize: "larger"}} />
+                      </Button>
+              }
               <Divider />
               <Button 
                 className="post-reaction"

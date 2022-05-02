@@ -111,7 +111,6 @@ textarea {
 }
 
 .post-reaction {
-  display: inline-block;
   padding: 0;
   padding-right: 20px;
   border: none;
@@ -133,5 +132,29 @@ textarea {
 }
 
 .post-reaction:active {
+  background: none;
+}
+
+.post-delete {
+  padding: 0;
+  border: none;
+  box-shadow: none;
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  font-size: medium;
+}
+
+.post-delete:hover {
+  color: black;
+}
+
+.post-delete:focus {
+  color: black;
+  border-color: #fafafa!important;
+  background: none;
+}
+
+.post-delete:active {
   background: none;
 }
