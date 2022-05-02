@@ -109,3 +109,29 @@ textarea {
   font-weight: 900;
   margin-bottom: 5px;
 }
+
+.post-reaction {
+  display: inline-block;
+  padding: 0;
+  padding-right: 20px;
+  border: none;
+  box-shadow: none;
+  position: absolute;
+  bottom: 0px;
+  left: 10px;
+  font-size: medium;
+}
+
+.post-reaction:hover {
+  color: black;
+}
+
+.post-reaction:focus {
+  color: black;
+  border-color: #fafafa!important;
+  background: none;
+}
+
+.post-reaction:active {
+  background: none;
+}

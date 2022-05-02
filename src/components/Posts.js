@@ -4,6 +4,7 @@ import { setDoc, doc, serverTimestamp, onSnapshot, collection } from 'firebase/f
 import { db } from '../firebase';
 import { useUserAuth } from '../context/AuthContext';
 import { v4 } from 'uuid';
+import { HeartFilled, HeartOutlined } from '@ant-design/icons';
 
 const Posts = () => {
   const [post, setPost] = useState("");
@@ -14,13 +15,32 @@ const Posts = () => {
     try {
       if(post.length !== 0) {
         await setDoc(doc(db, "posts", v4()), {
-          uid: user.uid,
-          userEmail: user.email,
+          userID: user.uid,
+          createdBy: user.email,
           post,
-          timeStamp: serverTimestamp()
+          wasLiked: false,
+          isLike: false,
+          likesCount: 0,
+          time: serverTimestamp()
         });
         setPost("");
       }
+    } catch (error) {
+      alert(error);
+    }
+  }
+
+  const likePost = async (post) => {
+    if(user === null) {
+      alert("You can`t like the post, you aren`t authorized")
+      return;
+    }
+    try {
+      await setDoc(doc(db, "posts", post.id), {
+        ...post,
+        wasLiked: !post.wasLiked,
+        likesCount: post.wasLiked === false ? post.likesCount += 1 : post.likesCount -= 1
+      });
     } catch (error) {
       alert(error);
     }
@@ -63,8 +83,16 @@ const Posts = () => {
                 {d.post}
               </div>
               <Divider />
+              <Button 
+                className="post-reaction"
+                onClick={() => likePost(d)}
+              >
+                {user !== null && d.wasLiked ? <HeartFilled style={{fontSize: "larger"}} /> : 
+                              <HeartOutlined style={{fontSize: "larger"}} />}
+                <>{d.likesCount !== 0 ? d.likesCount : null}</>
+              </Button>
               <div className="post-author">
-                Created by: {user !== null && d.uid === user.uid ? "You" : d.userEmail}
+                Created by: {user !== null && d.userID === user.uid ? "You" : d.createdBy}
               </div>
             </Col>  
             ))}

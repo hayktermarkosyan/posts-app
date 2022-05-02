@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { Col, Row, Button } from "antd";
+import { setDoc, doc, collection, onSnapshot } from 'firebase/firestore';
+import { db } from '../firebase';
 import { 
   HomeOutlined, 
   LogoutOutlined, 
@@ -11,6 +13,7 @@ import {
 import { useUserAuth } from '../context/AuthContext';
 
 const Navigation = () => {
+  const [data, setData] = useState([]);
   const { logOut, user } = useUserAuth();
   const navigate = useNavigate();
 
@@ -18,10 +21,40 @@ const Navigation = () => {
     try {
       await logOut();
       navigate("/", { replace: true });
+      data.map(async (post) => {
+        try {
+          await setDoc(doc(db, "posts", post.id), {
+            ...post,
+            waslLiked: false,
+          });
+        } catch (error) {
+          console.log(error.message);
+        }
+      })
     } catch (error) {
       console.log(error.message);
     }
   };
+
+  useEffect(() => {
+    const unsub = onSnapshot(
+      collection(db, "posts"),
+      (snapShot) => {
+        let list = [];
+        snapShot.docs.forEach((doc) => {
+          list.push({ id: doc.id, ...doc.data() });
+        });
+        setData(list);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+
+    return () => {
+      unsub();
+    };
+  }, [user])
 
   return (
     <Row justify="center">
