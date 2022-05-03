@@ -17,7 +17,7 @@ const Navigation = () => {
   const handleLogout = async () => {
     try {
       await logOut();
-      navigate("/", { replace: true });
+      navigate("/");
     } catch (error) {
       console.log(error.message);
     }

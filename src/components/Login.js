@@ -11,11 +11,12 @@ const Login = () => {
   const { logIn, googleSignIn } = useUserAuth();
   const navigate = useNavigate();
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     setError("");
     try {
       await logIn(email, password);
-      navigate("/home", { replace: true });
+      navigate("/home");
     } catch (err) {
       setError(err.message);
     }
@@ -48,7 +49,7 @@ const Login = () => {
         }
         <Form 
           name="login" 
-          onFinish={handleSubmit} 
+          onSubmitCapture={handleSubmit} 
           validateMessages={{
             required: true,
             types: {

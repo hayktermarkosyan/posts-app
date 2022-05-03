@@ -86,7 +86,7 @@ textarea {
   min-height: 150px;
   border-radius: 10px;
   margin-bottom: 25px;
-  margin-left: 40px;
+  margin-left: 20px;
   padding: 10px;
   word-break: break-all;
 }
@@ -156,5 +156,29 @@ textarea {
 }
 
 .post-delete:active {
+  background: none;
+}
+
+.post-edit {
+  padding: 0;
+  border: none;
+  box-shadow: none;
+  position: absolute;
+  bottom: 0px;
+  left: 70px;
+  font-size: medium;
+}
+
+.post-edit:hover {
+  color: black;
+}
+
+.post-edit:focus {
+  color: black;
+  border-color: #fafafa!important;
+  background: none;
+}
+
+.post-edit:active {
   background: none;
 }

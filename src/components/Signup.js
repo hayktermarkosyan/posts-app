@@ -7,15 +7,17 @@ const Signup = () => {
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
   const [password, setPassword] = useState("");
-  const { signUp } = useUserAuth();
+  const { signUp, logOut } = useUserAuth();
   const navigate = useNavigate();
   
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     setError("");
     try {
       await signUp(email, password);
-      navigate("/", { replace: true });
+      await logOut();
+      navigate("/");
     } catch (err) {
       setError(err.message);
     }
@@ -38,7 +40,7 @@ const Signup = () => {
         }
         <Form 
           name="login" 
-          onFinish={handleSubmit} 
+          onSubmitCapture={handleSubmit} 
           validateMessages={{
             required: true,
             types: {

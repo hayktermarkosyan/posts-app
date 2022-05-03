@@ -1,14 +1,16 @@
 import React, { useState , useEffect} from 'react';
-import { Button, Col, Divider, Input, Row } from 'antd';
+import { Button, Col, Divider, Input, Row, Modal } from 'antd';
 import { deleteDoc, setDoc, doc, serverTimestamp, onSnapshot, collection } from 'firebase/firestore';
 import { db } from '../firebase';
 import { useUserAuth } from '../context/AuthContext';
 import { v4 } from 'uuid';
-import { HeartFilled, HeartOutlined, CloseCircleOutlined } from '@ant-design/icons';
+import { HeartFilled, HeartOutlined, CloseCircleOutlined, EditOutlined } from '@ant-design/icons';
 
 const Posts = () => {
   const [post, setPost] = useState("");
   const [data, setData] = useState([]);
+  const [visibleEdit, setVisibleEdit] = useState(false);
+  const [editPostText, setEditPostText] = useState("");
   const { user } = useUserAuth();
 
   const createPost = async () => {
@@ -52,6 +54,18 @@ const Posts = () => {
     }
   }
 
+  const editPost = async (post) => {
+    try {
+      console.log(post.id)
+      await setDoc(doc(db, "posts", post.id), {
+        ...post,
+        post: editPostText
+      });
+    } catch (error) {
+      alert(error);
+    }
+  }
+
   useEffect(() => {
     const unsub = onSnapshot(
       collection(db, "posts"),
@@ -75,7 +89,7 @@ const Posts = () => {
 
   return (
     <Col 
-      span={20} xs={{offset: 4}} sm={{offset: 0}} 
+      span={20} xs={{offset: 4}} sm={{offset: 2}} lg={{offset: 1}}
       align="center" style={{fontSize: "40px"}}
     >
           Posts
@@ -84,7 +98,7 @@ const Posts = () => {
             justify="start"
           >
             {data.map(d => (
-              <Col xs={16} sm={10} md={10} lg={5} key={d.id} className="post-place" >
+              <Col xs={22} sm={22} md={10} lg={11} key={d.id} className="post-place" >
               <div className="post-text">
                 {d.post}
               </div>
@@ -96,7 +110,46 @@ const Posts = () => {
                         <CloseCircleOutlined style={{fontSize: "larger"}} />
                       </Button>
               }
+
               <Divider />
+
+              {(user !== null && d.userID === user.uid) && 
+                      <>
+                        <Button
+                          className="post-edit"
+                          onClick={() => {
+                            setVisibleEdit(true);
+                            setEditPostText(d.post);
+                            console.log(d.id)
+                          }}
+                        >
+                          <EditOutlined style={{fontSize: "larger"}} />
+                        </Button>
+
+                        <Modal
+                          title="Edit Post"
+                          visible={visibleEdit}
+                          onOk={() => {
+                            debugger
+                            setVisibleEdit(false);
+                            editPost(d);
+                          }}
+                          onCancel={() => setVisibleEdit(false)}
+                          okText="Edit"
+                          width={1000}
+                        >
+                          <Input.TextArea 
+                            style={{fontSize: "20px", width: 1000}}
+                            rows={10} 
+                            placeholder="Write a post" 
+                            maxLength={1000} 
+                            value={editPostText}
+                            onChange={(e) => setEditPostText(e.target.value)}
+                          />
+                        </Modal>
+                      </>
+              }
+              
               <Button 
                 className="post-reaction"
                 onClick={() => likePost(d)}
@@ -117,9 +170,10 @@ const Posts = () => {
           {user && (
             <Row>
               <Col 
-                xs={{span: 20, offset: 1}} 
-                sm={{span: 21, offset: 2}} 
-                md={{span: 22, offset: 1}} lg={22}
+                xs={{span: 22, offset: 1}} 
+                sm={{span: 22, offset: 1}} 
+                md={{span: 21, offset: 1}} 
+                lg={{span: 22, offset: 1}}
               >
                 <Input.TextArea 
                   style={{marginTop: "25px", fontSize: "20px"}}
