@@ -7,7 +7,7 @@ import { useUserAuth } from "../context/AuthContext";
 
 const Home = () => {
   const { user } = useUserAuth();
-  const [data, setData] = useState([]);
+  const [userData, setUserData] = useState([]);
 
   useEffect(() => {
     const unsub = onSnapshot(
@@ -19,7 +19,7 @@ const Home = () => {
         });
         list.forEach(item => {
           if(item.id === user.uid) {
-            setData(item);
+            setUserData(item);
           }
         });
       },
@@ -45,13 +45,13 @@ const Home = () => {
           hoverable
           style={{ width: 300 }}
           cover={
-            data.profilePhoto !== undefined ? <img alt="user" src={data.profilePhoto} /> :
+            userData.profilePhoto !== undefined ? <img alt="user" src={userData.profilePhoto} /> :
                                               <img alt="unknown" src={unknownUser} />
           }
         >
           <Card.Meta 
-            title={data.name !== undefined ? data.name : "Unknown user"} 
-            description={data.phoneNum !== undefined ? data.phoneNum : "Unknown user"} />
+            title={userData.name !== undefined ? userData.name : "Unknown user"} 
+            description={userData.phoneNum !== undefined ? userData.phoneNum : "Unknown user"} />
         </Card>
       </div>
     </Col>
