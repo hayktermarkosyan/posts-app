@@ -7,6 +7,8 @@ import EditPost from './EditPost';
 import LikePost from './LikePost';
 import DeletePost from './DeletePost';
 import CreatePost from './CreatePost';
+import CreateComment from './CreateComment';
+import Comments from './Comments';
 
 const Posts = () => {
   const [postsData, setPostsData] = useState([]);
@@ -43,12 +45,16 @@ const Posts = () => {
             justify="start"
           >
             {postsData.map(post => (
-              <Col xs={22} sm={22} md={10} lg={11} key={post.id} className="post-place">
+              <Col xs={22} sm={22} md={22} lg={22} key={post.id} className="post-place">
                 <div className="post-text">{post.text}</div>
 
                 {(user !== null && post.userID === user.uid) && <DeletePost post={post} />}
 
                 <Divider />
+
+                {post.comments.length !== 0 && <Comments comments={post.comments} />}
+
+                {user && <CreateComment post={post} />}
 
                 {(user !== null && post.userID === user.uid) && <EditPost post={post} />}
                 

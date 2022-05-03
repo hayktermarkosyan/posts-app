@@ -79,6 +79,7 @@ input[type=file]::file-selector-button:hover {
 
 textarea {
   border-radius: 10px!important;
+  resize: none;
 }
 
 .post-place {
@@ -102,7 +103,7 @@ textarea {
 
 .post-author {
   position: absolute;
-  bottom: 0px;
+  bottom: -7px;
   right: 10px;
   font-size: xx-small;
   font-style: italic;
@@ -181,4 +182,44 @@ textarea {
 
 .post-edit:active {
   background: none;
+}
+
+.post-comment {
+  padding: 0;
+  border: none;
+  box-shadow: none;
+  position: absolute;
+  bottom: 0px;
+  right: -25px;
+  font-size: medium;
+}
+
+.post-comment:hover {
+  color: black;
+}
+
+.post-comment:focus {
+  color: black;
+  border-color: #fafafa!important;
+  background: none;
+}
+
+.post-comment:active {
+  background: none;
+}
+
+.comment-place {
+  background-color: #d9d9d9;
+  border-radius: 10px;
+  padding: 5px;
+  margin-bottom: 10px;
+  font-size: small;
+  text-align: start;
+}
+
+.comment-image {
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  margin-top: 10px;
 }

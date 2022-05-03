@@ -17,6 +17,7 @@ const CreatePost = () => {
               createdBy: user.email,
               text: post,
               wasLikedBy: [],
+              comments: [],
               time: serverTimestamp()
             });
             setPost("");
@@ -30,9 +31,9 @@ const CreatePost = () => {
         <Row>
             <Col 
                 xs={{span: 22, offset: 1}} 
-                sm={{span: 22, offset: 1}} 
+                sm={{span: 21, offset: 1}} 
                 md={{span: 21, offset: 1}} 
-                lg={{span: 22, offset: 1}}
+                lg={{span: 21, offset: 1}}
             >
             <Input.TextArea 
                 style={{marginTop: "25px", fontSize: "20px"}}
