@@ -223,3 +223,12 @@ textarea {
   height: 30px;
   margin-top: 10px;
 }
+
+.all-comments {
+  border: none;
+  font-style: italic;
+}
+
+.all-comments:focus {
+  color: black;
+}
