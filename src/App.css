@@ -113,7 +113,6 @@ textarea {
 
 .post-reaction {
   padding: 0;
-  padding-right: 20px;
   border: none;
   box-shadow: none;
   position: absolute;
@@ -134,6 +133,55 @@ textarea {
 
 .post-reaction:active {
   background: none;
+}
+
+.post-reaction-users-number {
+  color: black;
+  padding: 0;
+  position: absolute;
+  bottom: 4px;
+  left: 35px;
+  font-size: medium;
+}
+
+.post-reaction-users-number:hover {
+  color: black;
+}
+
+.post-reaction-users-number:focus {
+  color: black;
+  border-color: #fafafa!important;
+  background: none;
+}
+
+.post-reaction-users-number:active {
+  background: none;
+}
+
+.reaction-dropdown {
+  padding: 0;
+  width: 170px;
+  background-color: #d9d9d9;
+  list-style: none;
+  position: absolute;
+  bottom: -10px;
+  left: 0;
+  border-radius: 10px;
+}
+
+.reaction-image {
+  margin-left: 5px;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.reaction-user-name {
+  font-size: small;
+  font-weight: 700;
 }
 
 .post-delete {
