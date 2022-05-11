@@ -18,7 +18,6 @@ const Navigation = () => {
   const handleLogout = async () => {
     try {
       await logOut();
-      localStorage.removeItem("accessToken");
       navigate("/");
     } catch (error) {
       console.log(error.message);

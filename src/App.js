@@ -8,8 +8,9 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import Navigation from "./components/Navigation";
 import Profile from "./components/Profile";
 import Posts from "./components/Posts";
-import { useUserAuth } from "./context/AuthContext";
 import SavedPosts from "./components/SavedPosts";
+import { useUserAuth } from "./context/AuthContext";
+import Loading from "./components/Loading";
 
 function App() {
   const { user } = useUserAuth();
@@ -34,55 +35,24 @@ function App() {
       <Layout style={{backgroundColor: "white", marginTop: "20px"}}>
         <Layout.Content>
           <Row justify="center" align="middle">
-            <Routes>
-              <Route
-                exact
-                path="/home"
-                element={
-                  <ProtectedRoute>
-                    <Home />
-                  </ProtectedRoute>
-                }
-              />
-              <Route
-                exact
-                path="/profile"
-                element={
-                  <ProtectedRoute>
-                    <Profile />
-                  </ProtectedRoute>
-                }
-              />
-              <Route
-                exact
-                path="/saved"
-                element={
-                  <ProtectedRoute>
-                    <SavedPosts />
-                  </ProtectedRoute>
-                }
-              />
-              <Route
-                exact
-                path="/posts"
-                element={<Posts />}
-              />
-              <Route 
-                exact 
-                path="/" 
-                element={user ? <Navigate to="/home" /> : <Login />}
-              />
-              <Route 
-                exact
-                path="/signup" 
-                element={user ? <Navigate to="/home" /> : <Signup />} 
-              />
-              <Route 
-                exact
-                path="*" 
-                element={<Navigate to="/home" />} 
-              />
+            
+              <Routes>
+                <Route exact path="/" element={<ProtectedRoute />}>
+                  <Route index element={<Home />} />
+                  <Route exact path="/profile" element={<Profile />} />
+                  <Route exact path="/saved" element={<SavedPosts />} />
+                </Route>
+
+                <Route exact path="/posts" element={<Posts />} />
+
+                <Route exact path="/login" element={<Login />} />
+
+                <Route exact path="/signup" element={<Signup />} />
+
+                <Route exact path="*" element={<Navigate to="/" />} />
             </Routes>
+            
+            
           </Row>
         </Layout.Content>
       </Layout>

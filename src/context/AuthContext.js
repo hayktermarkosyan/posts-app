@@ -14,6 +14,8 @@ const userAuthContext = createContext();
 export function UserAuthContextProvider({ children }) {
   const [user, setUser] = useState(null);
 
+  const [loading, setLoading] = useState(true)
+
   function logIn(email, password) {
     return signInWithEmailAndPassword(auth, email, password);
   }
@@ -32,7 +34,7 @@ export function UserAuthContextProvider({ children }) {
     const unsubscribe = onAuthStateChanged(auth, (currentuser) => {
       console.log("Auth", currentuser);
       setUser(currentuser);
-      if(currentuser !== null) localStorage.setItem("accessToken", currentuser.accessToken);
+      setLoading(false)
     });
 
     return () => {
@@ -42,7 +44,7 @@ export function UserAuthContextProvider({ children }) {
 
   return (
     <userAuthContext.Provider
-      value={{ user, logIn, signUp, logOut, googleSignIn }}
+      value={{ user, logIn, signUp, logOut, googleSignIn, loading }}
     >
       {children}
     </userAuthContext.Provider>

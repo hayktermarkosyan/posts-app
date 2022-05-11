@@ -37,29 +37,32 @@ const Posts = () => {
   }, [user])
 
   useEffect(() => {
-    const unsub = onSnapshot(
-      collection(db, "users"),
-      (snapShot) => {
-        let list = [];
-        snapShot.docs.forEach((doc) => {
-          list.push({ id: doc.id, ...doc.data() });
-        });
-        list.forEach(item => {
-          if(item.id === user.uid) {
-            setUserData(item);
-          }
-        });
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
-
-    return () => {
-      unsub();
-    };
+    if(user !== null) {
+      const unsub = onSnapshot(
+        collection(db, "users"),
+        (snapShot) => {
+          let list = [];
+          snapShot.docs.forEach((doc) => {
+            list.push({ id: doc.id, ...doc.data() });
+          });
+          list.forEach(item => {
+            if(item.id === user.uid) {
+              setUserData(item);
+            }
+          });
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+  
+      return () => {
+        unsub();
+      };
+    }
   }, [user])
 
+  console.log(userData)
   return (
     <Col 
       span={20} xs={{offset: 4}} sm={{offset: 2}} lg={{offset: 1}}

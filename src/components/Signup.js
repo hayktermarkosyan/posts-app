@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Form, Alert, Button, Input, Col } from "antd";
 import { useUserAuth } from "../context/AuthContext";
-import Loading from "./Loading";
 
 const Signup = () => {
   const [email, setEmail] = useState("");
@@ -24,7 +23,7 @@ const Signup = () => {
     }
   };
 
-  return localStorage.getItem("accessToken") !== null ? <Loading marginTop="100px" /> : (
+  return (
     <Col 
       xs={{span: 14, offset: 2}} 
       sm={{span: 16, offset: 2}} 
