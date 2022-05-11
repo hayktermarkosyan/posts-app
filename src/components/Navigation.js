@@ -6,7 +6,8 @@ import {
   LogoutOutlined, 
   LoginOutlined, 
   ProfileOutlined,
-  UnorderedListOutlined
+  UnorderedListOutlined,
+  SaveOutlined
 } from "@ant-design/icons";
 import { useUserAuth } from '../context/AuthContext';
 
@@ -17,6 +18,7 @@ const Navigation = () => {
   const handleLogout = async () => {
     try {
       await logOut();
+      localStorage.removeItem("accessToken");
       navigate("/");
     } catch (error) {
       console.log(error.message);
@@ -26,6 +28,15 @@ const Navigation = () => {
   return (
     <Row justify="center">
       <Col>
+        {user && <Link 
+                    to="/profile" 
+                    title="Profile" 
+                    className="icon-btn" 
+                    style={{top: 0}} 
+                  >
+                  <ProfileOutlined className="icon" />
+                </Link>
+        }
         {user && <Link to="/home" 
                     title="Home" 
                     className="icon-btn" 
@@ -42,12 +53,12 @@ const Navigation = () => {
           <UnorderedListOutlined className="icon" />
         </Link>
         {user && <Link 
-                    to="/profile" 
-                    title="Profile" 
+                    to="/saved" 
+                    title="Saved Posts" 
                     className="icon-btn" 
-                    style={{top: 0}} 
+                    style={{top: 480}} 
                   >
-                  <ProfileOutlined className="icon" />
+                  <SaveOutlined className="icon" />
                 </Link>
         }
         {user && <Button 

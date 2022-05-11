@@ -214,7 +214,7 @@ textarea {
   box-shadow: none;
   position: absolute;
   bottom: 0px;
-  left: 70px;
+  left: 90px;
   font-size: medium;
 }
 
@@ -284,4 +284,28 @@ textarea {
 
 .all-comments:focus {
   color: black;
+}
+
+.post-saved {
+  padding: 0;
+  border: none;
+  box-shadow: none;
+  position: absolute;
+  bottom: 0px;
+  left: 55px;
+  font-size: medium;
+}
+
+.post-saved:hover {
+  color: black;
+}
+
+.post-saved:focus {
+  color: black;
+  border-color: #fafafa!important;
+  background: none;
+}
+
+.post-saved:active {
+  background: none;
 }

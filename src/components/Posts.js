@@ -9,9 +9,11 @@ import DeletePost from './DeletePost';
 import CreatePost from './CreatePost';
 import CreateComment from './CreateComment';
 import Comments from './Comments';
+import SavePost from './SavePost';
 
 const Posts = () => {
   const [postsData, setPostsData] = useState([]);
+  const [userData, setUserData] = useState([]);
   const { user } = useUserAuth();
 
   useEffect(() => {
@@ -34,12 +36,37 @@ const Posts = () => {
     };
   }, [user])
 
+  useEffect(() => {
+    const unsub = onSnapshot(
+      collection(db, "users"),
+      (snapShot) => {
+        let list = [];
+        snapShot.docs.forEach((doc) => {
+          list.push({ id: doc.id, ...doc.data() });
+        });
+        list.forEach(item => {
+          if(item.id === user.uid) {
+            setUserData(item);
+          }
+        });
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+
+    return () => {
+      unsub();
+    };
+  }, [user])
+
   return (
     <Col 
       span={20} xs={{offset: 4}} sm={{offset: 2}} lg={{offset: 1}}
       align="center" style={{fontSize: "40px"}}
     >
           Posts
+          
           <Row 
             style={{marginTop: "25px", fontSize: "16px"}} 
             justify="start"
@@ -59,6 +86,8 @@ const Posts = () => {
                 {(user !== null && post.userID === user.uid) && <EditPost post={post} />}
                 
                 <LikePost post={post} />
+
+                {user && <SavePost post={post} userData={userData} />}
                 
                 <div className="post-author">
                   Created by: {user !== null && post.userID === user.uid ? "You" : post.createdBy}
@@ -67,7 +96,7 @@ const Posts = () => {
               ))
             }
           </Row>
-
+          
           {user && <CreatePost />}
     </Col>
   )

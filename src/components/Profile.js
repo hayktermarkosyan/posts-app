@@ -139,6 +139,7 @@ const Profile = () => {
               htmlType="submit"
               size="large"
               className="page-btn"
+              disabled={perc !== null && perc < 100}
             >
               Edit Profile
             </Button>

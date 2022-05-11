@@ -17,16 +17,23 @@ const EditPost = ({post}) => {
         } catch (error) {
           alert(error);
         }
-      }
+    }
+
+    const onEditBtnClick = (text) => {
+        setVisibleEdit(true);
+        setEditPostText(text)
+    }
+
+    const onOkBtnClick = (post) => {
+        setVisibleEdit(false);
+        editPost(post);
+    }
 
     return (
         <>
             <Button
                 className="post-edit"
-                onClick={() => {
-                    setVisibleEdit(true);
-                    setEditPostText(post.text);
-                }}
+                onClick={() => onEditBtnClick(post.text)}
             >
                 <EditOutlined style={{fontSize: "larger"}} />
             </Button>
@@ -34,10 +41,7 @@ const EditPost = ({post}) => {
             <Modal
                 title="Edit Post"
                 visible={visibleEdit}
-                onOk={() => {
-                    setVisibleEdit(false);
-                    editPost(post);
-                }}
+                onOk={() => onOkBtnClick(post)}
                 onCancel={() => setVisibleEdit(false)}
                 okText="Edit"
                 width={1000}
