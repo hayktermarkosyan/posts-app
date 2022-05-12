@@ -38,6 +38,16 @@
   font-size: 30px;
 }
 
+.sider {
+  overflow: auto;
+  height: 100vh;
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  border-right: 1px solid #bfc2c6;
+}
+
 .page-btn {
   width: 100%;
   border-radius: 10px;
@@ -214,7 +224,7 @@ textarea {
   box-shadow: none;
   position: absolute;
   bottom: 0px;
-  left: 90px;
+  left: 80px;
   font-size: medium;
 }
 
@@ -292,7 +302,7 @@ textarea {
   box-shadow: none;
   position: absolute;
   bottom: 0px;
-  left: 55px;
+  left: 50px;
   font-size: medium;
 }
 
@@ -308,4 +318,18 @@ textarea {
 
 .post-saved:active {
   background: none;
+}
+
+.saved-post-text {
+  margin-bottom: 20px;
+  font-weight: 400;
+  text-align: justify;
+  word-break: keep-all;
+  word-wrap: break-word;
+  font-size: small;
+}
+
+.saved-post-text:hover {
+  cursor: pointer;
+  font-size: 13.5px;
 }

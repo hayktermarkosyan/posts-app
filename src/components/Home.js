@@ -3,10 +3,8 @@ import { collection, onSnapshot } from "firebase/firestore";
 import { db } from "../firebase";
 import { Col, Card } from "antd";
 import unknownUser from "../images/unknown_user.png";
-import { useUserAuth } from "../context/AuthContext";
 
-const Home = () => {
-  const { user } = useUserAuth();
+const Home = ({user}) => {
   const [userData, setUserData] = useState([]);
 
   useEffect(() => {

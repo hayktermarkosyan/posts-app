@@ -35,7 +35,7 @@ const EditPost = ({post}) => {
                 className="post-edit"
                 onClick={() => onEditBtnClick(post.text)}
             >
-                <EditOutlined style={{fontSize: "larger"}} />
+                <EditOutlined title='Click to edit post' style={{fontSize: "larger"}} />
             </Button>
 
             <Modal

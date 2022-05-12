@@ -24,9 +24,10 @@ const SavePost = ({post, userData}) => {
             className="post-saved"
             onClick={savePost}
         >
-            {userData.savedPosts.some(el => el.id === post.id) ? 
-                <SaveFilled style={{fontSize: "larger"}} /> : 
-                <SaveOutlined style={{fontSize: "larger"}} />}
+            {userData.savedPosts.length !== 0 ? (userData.savedPosts.some(el => el.id === post.id) ? 
+                <SaveFilled title='Click to unsave post' style={{fontSize: "larger"}} /> : 
+                <SaveOutlined title='Click to save post' style={{fontSize: "larger"}} />) 
+                : <SaveOutlined title='Click to save post' style={{fontSize: "larger"}} />}
                 
             
         </Button>

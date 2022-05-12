@@ -5,15 +5,15 @@ import { UserOutlined, PhoneOutlined } from '@ant-design/icons';
 import { setDoc, doc, serverTimestamp } from 'firebase/firestore';
 import { db, storage } from '../firebase';
 import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
-import { useUserAuth } from '../context/AuthContext';
+// import { useUserAuth } from '../context/AuthContext';
 
-const Profile = () => {
+const Profile = ({user}) => {
   const [image, setImage] = useState();
   const [name, setName] = useState();
   const [phoneNum, setPhoneNum] = useState();
   const [data, setData] = useState([]);
   const navigate = useNavigate();
-  const { user } = useUserAuth();
+  // const { user } = useUserAuth();
   const [perc, setPerc] = useState();
   
   const handleSubmit = async () => {

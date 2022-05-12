@@ -3,11 +3,9 @@ import { Button, Col, Input, Row } from 'antd';
 import { setDoc, doc, serverTimestamp } from 'firebase/firestore';
 import { db } from '../firebase';
 import { v4 } from 'uuid';
-import { useUserAuth } from '../context/AuthContext';
 
-const CreatePost = () => {
+const CreatePost = ({user}) => {
     const [post, setPost] = useState("");
-    const { user } = useUserAuth();
 
     const createPost = async () => {
         try {

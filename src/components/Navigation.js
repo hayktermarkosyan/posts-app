@@ -9,15 +9,16 @@ import {
   UnorderedListOutlined,
   SaveOutlined
 } from "@ant-design/icons";
-import { useUserAuth } from '../context/AuthContext';
+// import { useUserAuth } from '../context/AuthContext';
 
-const Navigation = () => {
-  const { logOut, user } = useUserAuth();
+const Navigation = ({user, logOut}) => {
+  // const { logOut, user } = useUserAuth();
   const navigate = useNavigate();
 
   const handleLogout = async () => {
     try {
       await logOut();
+      localStorage.removeItem("accessToken");
       navigate("/");
     } catch (error) {
       console.log(error.message);

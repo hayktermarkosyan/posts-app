@@ -1,13 +1,11 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Form, Alert, Button, Input, Col } from "antd";
-import { useUserAuth } from "../context/AuthContext";
 
-const Signup = () => {
+const Signup = ({signUp, logOut}) => {
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
   const [password, setPassword] = useState("");
-  const { signUp, logOut } = useUserAuth();
   const navigate = useNavigate();
   
 

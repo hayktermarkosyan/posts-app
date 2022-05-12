@@ -3,11 +3,9 @@ import { Col, Row, Divider, Modal } from 'antd';
 import Loading from './Loading';
 import { collection, onSnapshot } from 'firebase/firestore';
 import { db } from '../firebase';
-import { useUserAuth } from '../context/AuthContext';
 import DeleteSavedPost from './DeleteSavedPost';
 
-const SavedPosts = () => {
-    const { user } = useUserAuth();
+const SavedPosts = ({user}) => {
     const [userData, setUserData] = useState([]);
     const [visible, setVisible] = useState(false);
     const [postText, setPostText] = useState();
@@ -60,7 +58,8 @@ const SavedPosts = () => {
                         className="post-place"
                     >
                         <div 
-                            className="post-text"
+                            className="saved-post-text"
+                            title='Click to read post'
                             onClick={() => onPostClick(post.text)}
                         >
                             {post.text}
@@ -82,7 +81,7 @@ const SavedPosts = () => {
                     style={{marginTop: "25px", fontSize: "16px"}} 
                     justify="center"
                 >
-                    <Loading marginTop="0px" />
+                    <Loading />
                 </Row>
             )
             }
@@ -100,9 +99,10 @@ const SavedPosts = () => {
                 onOk={() => setVisible(false)}
                 onCancel={() => setVisible(false)}
                 okText="Close"
-                width={500}
+                width={1200}
+                
             >
-                {postText}
+                <div style={{fontSize: "26px"}}>{postText}</div>
             </Modal>
         </>
     )

@@ -3,12 +3,10 @@ import { setDoc, doc, onSnapshot, collection } from 'firebase/firestore';
 import { db } from '../firebase';
 import React, { useState, useEffect } from 'react';
 import { CommentOutlined } from '@ant-design/icons';
-import { useUserAuth } from '../context/AuthContext';
 import { v4 } from 'uuid';
 
-const CreateComment = ({post}) => {
+const CreateComment = ({post, user}) => {
     const [comment, setComment] = useState();
-    const { user } = useUserAuth();
     const [userData, setUserData] = useState([]);
 
     const createComment = async (post) => {

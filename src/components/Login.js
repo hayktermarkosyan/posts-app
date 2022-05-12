@@ -1,14 +1,12 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Col, Form, Alert, Button, Input } from "antd";
-import { useUserAuth } from "../context/AuthContext";
 import GoogleButton from "react-google-button";
 
-const Login = () => {
+const Login = ({logIn, googleSignIn}) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const { logIn, googleSignIn } = useUserAuth();
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {

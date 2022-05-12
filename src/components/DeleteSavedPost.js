@@ -22,7 +22,7 @@ const DeleteSavedPost = ({post, userData}) => {
             className="post-delete"
             onClick={() => deletePost(post)}
         >
-            <CloseCircleOutlined style={{fontSize: "larger"}} />
+            <CloseCircleOutlined title='Click to unsave post' style={{fontSize: "larger"}} />
         </Button>
     )
 }

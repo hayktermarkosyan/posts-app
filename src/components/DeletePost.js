@@ -19,7 +19,7 @@ const DeletePost = ({post}) => {
             className="post-delete"
             onClick={() => deletePost(post)}
         >
-            <CloseCircleOutlined style={{fontSize: "larger"}} />
+            <CloseCircleOutlined title='Click to delete post' style={{fontSize: "larger"}} />
         </Button>
     )
 }

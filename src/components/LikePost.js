@@ -2,12 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { Button, Dropdown, Space, Row, Col } from 'antd';
 import { setDoc, doc, onSnapshot, collection } from 'firebase/firestore';
 import { db } from '../firebase';
-import { useUserAuth } from '../context/AuthContext';
 import { HeartFilled, HeartOutlined } from '@ant-design/icons';
 import unknownUser from "../images/unknown_user.png"
 
-const LikePost = ({post}) => {
-    const { user } = useUserAuth();
+const LikePost = ({post, user}) => {
     const [userData, setUserData] = useState([]);
 
     const wasLikedByUsersList = (
