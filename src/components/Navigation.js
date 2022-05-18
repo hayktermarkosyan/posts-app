@@ -9,10 +9,8 @@ import {
   UnorderedListOutlined,
   SaveOutlined
 } from "@ant-design/icons";
-// import { useUserAuth } from '../context/AuthContext';
 
 const Navigation = ({user, logOut}) => {
-  // const { logOut, user } = useUserAuth();
   const navigate = useNavigate();
 
   const handleLogout = async () => {
