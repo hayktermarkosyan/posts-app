@@ -1,21 +1,20 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { signUp } from "../utils";
 import { Form, Alert, Button, Input, Col } from "antd";
 
-const Signup = ({signUp, logOut}) => {
+const Signup = () => {
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
-  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
     try {
       await signUp(email, password);
-      await logOut();
-      navigate("/");
+      navigate("/login");
     } catch (err) {
       setError(err.message);
     }

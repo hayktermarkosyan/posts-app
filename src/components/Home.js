@@ -3,8 +3,10 @@ import { collection, onSnapshot } from "firebase/firestore";
 import { db } from "../firebase";
 import { Col, Card } from "antd";
 import unknownUser from "../images/unknown_user.png";
+import { useOutletContext } from "react-router-dom";
 
-const Home = ({user}) => {
+const Home = () => {
+  const [user] = useOutletContext();
   const [userData, setUserData] = useState([]);
 
   useEffect(() => {

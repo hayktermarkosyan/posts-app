@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useOutletContext } from 'react-router-dom';
 import { Col, Form, Input, Button } from 'antd';
-import { UserOutlined, PhoneOutlined } from '@ant-design/icons';
+import { UserOutlined } from '@ant-design/icons';
 import { setDoc, doc, serverTimestamp, collection, onSnapshot } from 'firebase/firestore';
 import { db, storage } from '../firebase';
 import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
+import 'react-phone-number-input/style.css';
+import PhoneInput from 'react-phone-number-input';
 
-const Profile = ({user}) => {
+const Profile = () => {
+  const [user] = useOutletContext();
   const [image, setImage] = useState();
   const [name, setName] = useState();
   const [phoneNum, setPhoneNum] = useState();
@@ -14,17 +17,6 @@ const Profile = ({user}) => {
   const navigate = useNavigate();
   const [perc, setPerc] = useState();
   const [userData, setUserData] = useState([]);
-
-  // const validateMessages = {
-  //   required: `${label} is required!`,
-  //   types: {
-  //     email: `${label} is not a valid email!`,
-  //     number: `${label} is not a valid number!`,
-  //   },
-  //   number: {
-  //     range: `${label} must be between ${min} and ${max}`,
-  //   },
-  // };
   
   const handleSubmit = async () => {
     try {
@@ -133,7 +125,6 @@ const Profile = ({user}) => {
         <Form 
           name="profile" 
           onFinish={handleSubmit} 
-          // validateMessages={validateMessages}
         >
           <Form.Item
             name="full-name"
@@ -155,7 +146,7 @@ const Profile = ({user}) => {
           </Form.Item>
 
           <Form.Item
-            name="phone-number"
+            name="phone"
             rules={[
               {
                 required: true,
@@ -163,15 +154,11 @@ const Profile = ({user}) => {
               },
             ]}
           >
-            <Input
-              type="text" 
+            <PhoneInput
               placeholder="Phone number"
-              prefix={<PhoneOutlined />} 
-              maxLength={11} 
-              pattern="/^\d{11}$/"           
-              size="large"
-              style={{borderRadius: "10px"}} 
-              onChange={(e) => setPhoneNum(e.target.value)} 
+              value={phoneNum}
+              onChange={setPhoneNum}
+              style={{fontSize: "large"}}
             />
           </Form.Item>
 

@@ -4,8 +4,10 @@ import Loading from './Loading';
 import { collection, onSnapshot } from 'firebase/firestore';
 import { db } from '../firebase';
 import DeleteSavedPost from './DeleteSavedPost';
+import { useOutletContext } from 'react-router-dom';
 
-const SavedPosts = ({user}) => {
+const SavedPosts = () => {
+    const [user] = useOutletContext();
     const [userData, setUserData] = useState([]);
     const [visible, setVisible] = useState(false);
     const [postText, setPostText] = useState();

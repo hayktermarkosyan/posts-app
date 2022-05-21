@@ -1,5 +1,6 @@
 import React from 'react';
 import { useNavigate, Link } from 'react-router-dom';
+import { logOut } from '../utils';
 import { Col, Row, Button } from "antd";
 import { 
   HomeOutlined, 
@@ -10,19 +11,18 @@ import {
   SaveOutlined
 } from "@ant-design/icons";
 
-const Navigation = ({user, logOut}) => {
+const Navigation = ({user}) => {
   const navigate = useNavigate();
 
   const handleLogout = async () => {
     try {
       await logOut();
-      localStorage.removeItem("accessToken");
       navigate("/");
     } catch (error) {
       console.log(error.message);
     }
   };
-
+  
   return (
     <Row justify="center">
       <Col>
@@ -35,7 +35,7 @@ const Navigation = ({user, logOut}) => {
                   <ProfileOutlined className="icon" />
                 </Link>
         }
-        {user && <Link to="/home" 
+        {user && <Link to="/" 
                     title="Home" 
                     className="icon-btn" 
                     style={{top:150}}>
